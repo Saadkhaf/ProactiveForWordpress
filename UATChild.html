@@ -62,7 +62,8 @@
         var width = helpButton.clientWidth;
         window.parent.postMessage({
                                   frameHeight: height,
-                                  frameWidth: width
+                                  frameWidth: width,
+                                  initiate: true
                                   }, '*'); 
         }
         window.onload = helpButtonLoaded();

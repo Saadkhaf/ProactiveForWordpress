@@ -227,7 +227,9 @@
 			document.getElementById('chatFrame').contentWindow.postMessage('closeInvite');
 			};
 			document.getElementById('rejectInvite').onclick = function() { embedded_svc.inviteAPI.inviteButton.rejectInvite(); }; // use this API call to reject invitations
-			document.getElementById('acceptInvite').onclick = function() { embedded_svc.inviteAPI.inviteButton.acceptInvite(); }; // use this API call to start chat from invitations
+			document.getElementById('acceptInvite').onclick = function() { 
+			document.getElementById('chatFrame').contentWindow.postMessage('acceptInvite');
+			}; // use this API call to start chat from invitations
 			document.addEventListener('keyup', function(event) { if (event.keyCode == 27) { embedded_svc.inviteAPI.inviteButton.rejectInvite(); }})
 		})();
 	</script>

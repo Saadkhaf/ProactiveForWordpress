@@ -1,0 +1,136 @@
+<html>
+
+  <head>
+    <title>Chat Widget</title>
+  </head>
+
+  <body>
+    <style type='text/css'>
+      .embeddedServiceHelpButton .helpButton .uiButton {
+        min-width: unset;
+        max-width: unset;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: unset !important;
+        text-decoration: none;
+        text-align: center;
+        padding: 15px 40px !important;
+        letter-spacing: .1em;
+        border-radius: 8px 8px 0 0;
+        box-sizing: border-box;
+        margin: 0;
+        height: 46px;
+        line-height: 1;
+        font-size: 0.875em;
+        color: #fff;
+        font-weight: normal;
+        text-shadow: none;
+        font-family: inherit;
+        background: red !important;
+        border: none;
+        text-transform: UPPERCASE;
+}
+.embeddedServiceHelpButton .helpButton {
+   position: fixed;
+   bottom: 0px;    right: 12px;
+   height: 46px;
+   -webkit-font-smoothing: subpixel-antialiased;
+} 
+.embeddedServiceSidebarMinimizedDefaultUI {
+   background-color: red !important;
+   border: none !important;
+}
+.embeddedServiceSidebarMinimizedDefaultUI:hover {
+   background-color: red !important;
+   border: none !important;
+}
+.embeddedServiceHelpButton .helpButton .helpButtonEnabled:hover::before, .embeddedServiceHelpButton .helpButton .helpButtonEnabled:focus::before {
+  border-radius: unset;
+}
+  </style>
+
+    <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.js'></script>
+    <script type='text/javascript'>
+      function helpButtonLoaded() {
+        var helpButton = document.querySelector('.helpButton');
+        if (!helpButton) {
+          window.setTimeout(helpButtonLoaded, 500);
+          return;
+        }
+        var height = helpButton.clientHeight;
+        var width = helpButton.clientWidth;
+        window.parent.postMessage({
+                                  frameHeight: height,
+                                  frameWidth: width
+                                  }, '*'); 
+        }
+        window.onload = helpButtonLoaded();
+  
+        var initESW = function(gslbBaseURL) {
+    		embedded_svc.settings.displayHelpButton = true;
+    		embedded_svc.settings.language = '';
+    		if (window.location.href.includes('cmfgroup.com')) {
+              embedded_svc.settings.storageDomain = 'cmfgroup.com';
+        }
+    		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+    		embedded_svc.settings.entryFeature = 'LiveAgent';
+    		embedded_svc.init(
+    			'https://cmfgroup--uat.sandbox.my.salesforce.com',
+    			'https://cmfgroup--uat.sandbox.my.site.com/',
+    			gslbBaseURL,
+    			'00DVZ000000IpTt',
+    			'Chat_Team',
+    			{
+    				baseLiveAgentContentURL: 'https://c.la2s-core1.sfdc-8tgtt5.salesforceliveagent.com/content',
+    				deploymentId: '572VZ000000Gxyc',
+    				buttonId: '573VZ0000002VhF',
+    				baseLiveAgentURL: 'https://d.la2s-core1.sfdc-8tgtt5.salesforceliveagent.com/chat',
+    				eswLiveAgentDevName: 'Chat_Team',
+    				isOfflineSupportEnabled: false
+    			}
+    		);
+
+        embedded_svc.addEventHandler("afterMinimize", function() {
+          var sidebar = document.querySelector('.embeddedServiceSidebarMinimizedDefaultUI');
+          var height = sidebar.clientHeight;
+          var width = sidebar.clientWidth;
+          window.parent.postMessage({
+            frameHeight: height,
+            frameWidth: width
+           }, '*');
+        });
+
+        embedded_svc.addEventHandler("afterMaximize", function() {
+          var container = document.querySelector('.dockableContainer');
+          var height = container.clientHeight;
+          var width = container.clientWidth;
+          window.parent.postMessage({
+            frameHeight: embedded_svc.settings.widgetHeight,
+            frameWidth: embedded_svc.settings.widgetWidth
+          }, '*');
+        });
+
+        embedded_svc.addEventHandler("afterDestroy", function() {
+          var height = document.querySelector('.helpButton').clientHeight;
+          var width = document.querySelector('.helpButton').clientWidth;
+          window.parent.postMessage({
+            frameHeight: height,
+            frameWidth: width
+          }, '*');
+        });
+      };
+
+     if (!window.embedded_svc) {
+  		var s = document.createElement('script');
+  		s.setAttribute('src', 'https://cmfgroup--uat.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+  		s.onload = function() {
+  			initESW(null);
+  		};
+  		document.body.appendChild(s);
+    	} else {
+    		initESW('https://service.force.com');
+    	}
+    </script>
+  </body>
+</html>

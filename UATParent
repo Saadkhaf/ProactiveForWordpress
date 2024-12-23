@@ -1,0 +1,44 @@
+<style>
+    .chat-frame {
+        position: fixed;
+        bottom: 0px;
+        right: 0;
+        width: 360px !important;
+        height: 60px;
+        border: 0;
+        z-index: 9999;
+        transition: height 0.3s ease; /* Smooth transition when height changes */
+    }
+
+    .chat-frame.is-open {
+        height: 498px;
+        //width: 360px;
+    }
+
+    /* Media query for small devices */
+    @media (max-width: 768px) {
+        .chat-frame {
+            width: 100%; /* Full width on small devices */
+            height: 60px; /* Initial height */
+        }
+
+        .chat-frame.is-open {
+            height: 675px; /* Smaller height for open state on mobile */
+        }
+    }
+</style>
+
+<script type="application/javascript">
+    window.onmessage = function (e) {
+        if (e.data?.isChatFrame) {
+            const chatFrame = document.getElementById("chatFrame");
+            if (e.data?.isOpen) {
+                chatFrame?.classList.add("is-open");
+            } else if (chatFrame?.classList.contains("is-open")) {
+                chatFrame.classList.remove("is-open");
+            }
+        }
+    };
+</script>
+
+<iframe class="chat-frame" id="chatFrame" src="https://cmf-group-inc.github.io/EmbeddedChatWidget/EmbeddedChatPageProd.html"></iframe>

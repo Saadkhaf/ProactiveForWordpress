@@ -193,15 +193,17 @@
 			color: #14B590;
 		}
 	</style>
-	<!-- <script type='text/javascript'>
+	<script type='text/javascript'>
 		(function() {
 			console.log('Chat Invite');
-			document.getElementById('closeInvite').onclick = function() { embedded_svc.inviteAPI.inviteButton.rejectInvite(); };
+			document.getElementById('closeInvite').onclick = function()  { 
+			document.getElementById('chatFrame').contentWindow.postMessage('closeInvite');
+			};
 			document.getElementById('rejectInvite').onclick = function() { embedded_svc.inviteAPI.inviteButton.rejectInvite(); }; // use this API call to reject invitations
 			document.getElementById('acceptInvite').onclick = function() { embedded_svc.inviteAPI.inviteButton.acceptInvite(); }; // use this API call to start chat from invitations
 			document.addEventListener('keyup', function(event) { if (event.keyCode == 27) { embedded_svc.inviteAPI.inviteButton.rejectInvite(); }})
 		})();
-	</script> -->
+	</script>
 	<!-- End of Invitations -->
 	<title>Salesforce Chat - Iframes POC</title>
 	<script type="application/javascript">

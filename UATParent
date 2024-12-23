@@ -246,24 +246,13 @@
 		    }, 10); // Small delay to ensure the transition works
 		  }
 		}, 10000); // Delay of 10 seconds
-		window.onmessage = function (e) {
-        if (e.data?.isChatFrame) {
-            const chatFrame = document.getElementById("chatFrame");
-            if (e.data?.isOpen) {
-                chatFrame?.classList.add("is-open");
-            } else if (chatFrame?.classList.contains("is-open")) {
-                chatFrame.classList.remove("is-open");
-            }
-        }
+        
     };
 	</script>
 </head>
 
 <body>
-	<div style="bottom: 0px; right: 0px; position: absolute; height: 90%; width: 498px;">
-		<iframe style="height: 100%; width: 100%; border: none;" id="chatFrame"
-			src="https://mhdarh.github.io/ProactiveForWordpress/UATChild.html"></iframe>
-	</div>
+	
 </body>
 
 </html>

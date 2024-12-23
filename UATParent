@@ -216,6 +216,16 @@
 		    }, 10); // Small delay to ensure the transition works
 		  }
 		}, 10000); // Delay of 10 seconds
+		window.onmessage = function (e) {
+        if (e.data?.isChatFrame) {
+            const chatFrame = document.getElementById("chatFrame");
+            if (e.data?.isOpen) {
+                chatFrame?.classList.add("is-open");
+            } else if (chatFrame?.classList.contains("is-open")) {
+                chatFrame.classList.remove("is-open");
+            }
+        }
+    };
 	</script>
 </head>
 

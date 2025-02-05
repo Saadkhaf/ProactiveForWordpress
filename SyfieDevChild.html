@@ -77,13 +77,15 @@
 		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 		embedded_svc.settings.entryFeature = 'LiveAgent';
 		embedded_svc.addEventHandler("afterChatMessageReceived", function () {
-        		const links = document.querySelectorAll('.embeddedServiceLiveMessageMessage a');
-        		links.forEach(link => {
-           			if (link.getAttribute('rel') === 'noopener') {
-               				link.removeAttribute('rel');
-            			}
-       			});
-    		});
+		        setTimeout(() => {
+		            const links = document.querySelectorAll('.embeddedServiceLiveMessageMessage a');
+		            links.forEach(link => {
+		                if (link.getAttribute('rel') === 'noopener') {
+		                    link.removeAttribute('rel');
+		                }
+		            });
+		        }, 100);
+		    });
 
 		embedded_svc.init(
 			'https://cmfgroup--syfiedev2.sandbox.my.salesforce.com',

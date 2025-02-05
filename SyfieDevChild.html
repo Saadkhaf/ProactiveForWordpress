@@ -77,10 +77,10 @@
 
 		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 		embedded_svc.settings.entryFeature = 'LiveAgent';
-		embedded_svc.addEventHandler("afterChatMessageReceived", function () {
+		embedded_svc.addEventHandler("onAgentMessage", function () {
 			console.log("Event Binded");
 		        setTimeout(() => {
-		            const links = document.querySelectorAll('.embeddedServiceLiveMessageMessage a');
+		            const links = document.querySelectorAll('.uiOutputRichText a');
 		            links.forEach(link => {
 		                if (link.getAttribute('rel') === 'noopener') {
 		                    link.removeAttribute('rel');
